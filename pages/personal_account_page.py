@@ -12,19 +12,15 @@ class PersonalAccountPage(BasePage):
 
     @allure.step("Авторизация")
     def login_account(self, data):
-        email_input = self.driver.find_element(*PersonalAccountLocators.LOGIN_EMAIL_INPUT)
-        password_input = self.driver.find_element(*PersonalAccountLocators.LOGIN_PASSWORD_INPUT)
-        enter_to_account_button = self.driver.find_element(*PersonalAccountLocators.LOGIN_BTN)
-
         self.input_text(PersonalAccountLocators.LOGIN_EMAIL_INPUT, data["email"])
         self.input_text(PersonalAccountLocators.LOGIN_PASSWORD_INPUT, data["password"])
-        self.driver.execute_script("arguments[0].click();", enter_to_account_button)
-
+        enter_to_account_button = self.wait_for_element_clickable(PersonalAccountLocators.LOGIN_BTN)
+        self.execute_script("arguments[0].click();", enter_to_account_button)
 
     @allure.step("Переходим в историю")
     def go_to_order_history(self):
         list_history = self.wait_for_element_visible(PersonalAccountLocators.ORDER_HISTORY)
-        self.driver.execute_script("arguments[0].click();", list_history)
+        self.execute_script("arguments[0].click();", list_history)
 
     @allure.step("Ищем и нажимаем на кнопку Выход из аккаунта")
     def logout_account(self):

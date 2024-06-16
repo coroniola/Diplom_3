@@ -46,4 +46,11 @@ class BasePage:
     def wait_url_changes(self, url):
         WebDriverWait(self.driver, 20).until(expected_conditions.url_changes(url))
 
+    def move_to_and_click(self, element):
+        actions = ActionChains(self.driver)
+        actions.move_to_element(element).click().perform()
+
+    def execute_script(self, script, *args):
+        return self.driver.execute_script(script, *args)
+
 

@@ -20,10 +20,10 @@ class RecoveryPasswordPage(BasePage):
     @allure.step("Нажимаем на кнопку Восстановить")
     def click_recovery_button(self):
         list_recovery_button = self.wait_for_element_visible(PersonalAccountLocators.RECOVERY_PASS_BTN)
-        self.driver.execute_script("arguments[0].click();", list_recovery_button)
+        self.execute_script("arguments[0].click();", list_recovery_button)
 
     @allure.step("Нажимаем на кнопку Показать пароль")
     def click_show_password_button(self):
         list_show_password_button = self.wait_for_element_visible(PersonalAccountLocators.SHOW_PASS_BTN)
-        self.driver.execute_script("arguments[0].click();", list_show_password_button)
+        self.execute_script("arguments[0].click();", list_show_password_button)
 

@@ -12,7 +12,7 @@ class OrderPage(BasePage):
     @allure.step("Нажимаем по заказ")
     def click_to_order(self):
         list_button_order = self.wait_for_element_visible(OrderPageLocators.ORDERS)
-        self.driver.execute_script("arguments[0].click();", list_button_order)
+        self.execute_script("arguments[0].click();", list_button_order)
 
     @allure.step("Получаем номер заказа")
     def get_num_order(self):
@@ -33,7 +33,6 @@ class OrderPage(BasePage):
         self.wait_for_element_clickable(OrderPageLocators.ORDER_IN_PROGRESS)
         self.wait_for_text_not_in_element(OrderPageLocators.ORDER_IN_PROGRESS, 'Все текущие заказы готовы!')
         return self.get_element_text(OrderPageLocators.ORDER_IN_PROGRESS)
-
 
     @allure.step("Ищем элемент по номеру заказа")
     def find_element_by_order_number(self, num_order):

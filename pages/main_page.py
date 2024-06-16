@@ -9,28 +9,22 @@ class MainPage(BasePage):
     @allure.step("Переходим к конструктору")
     def navigate_to_constructor(self):
         constructor_button = self.wait_for_element_clickable(MainPageLocators.CONSTRUCTOR_BUTTON)
-        if constructor_button.is_displayed() and constructor_button.is_enabled():
-            actions = ActionChains(self.driver)
-            actions.move_to_element(constructor_button).click().perform()
-        else:
-            raise Exception("Кнопка 'Конструктор' не видима или недоступна для клика")
+        self.move_to_and_click(constructor_button)
 
     @allure.step("Переходим на страницу ленты заказов")
     def navigate_to_order_feed(self):
         list_orders = self.wait_for_element_visible(MainPageLocators.ORDER_FEED)
-        self.driver.execute_script("arguments[0].click();", list_orders)
+        self.execute_script("arguments[0].click();", list_orders)
 
     @allure.step("Нажимаем на ингредиент")
     def click_to_ingredient(self):
         list_ingridients = self.wait_for_element_visible(MainPageLocators.INGREDIENT)
-        self.driver.execute_script("arguments[0].click();", list_ingridients )
-
+        self.execute_script("arguments[0].click();", list_ingridients )
 
     @allure.step("Закрываем всплывающее окно")
     def close_popup(self):
         list_close_pop_up_button = self.wait_for_element_visible(MainPageLocators.POP_UP_CLOSE_BTN)
-        self.driver.execute_script("arguments[0].click();", list_close_pop_up_button)
-
+        self.execute_script("arguments[0].click();", list_close_pop_up_button)
 
     @allure.step('Получаем текст информации об ингредиенте')
     def get_ingredient_info_text(self):
@@ -48,12 +42,12 @@ class MainPage(BasePage):
     def add_ingredient_to_constructor(self):
         ingredient = self.wait_for_element_clickable(MainPageLocators.INGREDIENT)
         add_to_order = self.wait_for_element_clickable(MainPageLocators.BURGER_CONSTRUCTOR)
-        drag_and_drop(self.driver, ingredient, add_to_order)
+        drag_and_drop(self, ingredient, add_to_order)
 
     @allure.step("Нажимаем на кнопку 'Оформить заказ'")
     def click_place_order_button(self):
         list_button_place_an_order = self.wait_for_element_visible(MainPageLocators.PLACE_ORDER)
-        self.driver.execute_script("arguments[0].click();", list_button_place_an_order)
+        self.execute_script("arguments[0].click();", list_button_place_an_order)
 
     @allure.step("Получаем количество ингредиентов")
     def get_ingredient_count(self):
